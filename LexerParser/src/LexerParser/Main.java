@@ -10,11 +10,13 @@ public class Main {
 		System.out.println("enter an input");
 		input=in.next();
 		Lexer newInput = new Lexer(input);
+		// checks the method isvalid
 		if(newInput.isValidInput()) 
 			System.out.println("true");
 		else
 			System.out.println("false");
 		// TODO Auto-generated method stub
 	}
+	
 
 }

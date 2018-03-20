@@ -84,7 +84,7 @@ public class Lexer {
 		return false;
 	}
 	/*if the token is an operator
-	 * 
+	 * *
 	 */
 	public static boolean isOperatorToken(char token) {
 		switch(token) {
