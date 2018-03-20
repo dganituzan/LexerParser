@@ -10,53 +10,82 @@ public class Lexer {
 	private String input;
 	private List<Character> allTokens;
 	  
-	//the constructor. getting the new string and initiate the tokens array.
+	/**the constructor. 
+	 * getting the new string and initiate the tokens array.
+	 * @param newInput
+	 */
 	
 	public Lexer(String newInput) {
 		this.input = newInput;
-		allTokens = new ArrayList<Character>();
+		this.allTokens = new ArrayList<Character>();
 		for(int i=0; i<this.input.length();i++) {
 			allTokens.add(this.input.charAt(i));
+			//System.out.println(allTokens);
 		}	
 	}
+	
+	/**checks if the input is valid
+	*/
 	public boolean isValidInput() {
+		boolean valid = true;
 		
-		// first of all , checking if the first token is`nt a operator
+		/** first of all, 
+		 * checking if the first token is`nt a operator
+		 */
 		
-		boolean valid = false;
 		switch(allTokens.get(0)) {
-		case '*': valid= false;
-		case ';': valid= false;
-		case ')': valid= false;
-		case '(': valid= false;
-		case '=': valid= false;
-		case '+': valid= false;
-		case '-': valid= false;
-		case '/': valid= false;
-		default: valid= true;
+		case '*': valid= false;break;
+		case ';': valid= false;break;
+		case ')': valid= false;break;
+		case '(': valid= false;break;
+		case '=': valid= false;break;
+		case '+': valid= false;break;
+		case '-': valid= false;break;
+		case '/': valid= false;break;
+		default: valid= true;break;
 		}
 		
-		//if its a single character, return true/false according to the switch above(valid).
+		/**if its a single character, return true/false
+		 *  according to the switch above(valid).
+		 */
 		
 		if (allTokens.size()==1) {
 			return valid;
 		}
-		//
+		
+		/** check all the options of allowed token
+		*/
+		for(int i=0; i<allTokens.size();i++) {
+			if(!(allowedChar(allTokens.get(i)))){
+				valid = false;
+			}
+		}
+		/**
 		//
 		// TODO : make more checkers
-		//
+		*/
 		return valid;
 	}
+	
+	/* if the token is a letter
+	 * 
+	 */
 	public static boolean isCharToken(char token) {
 		if(token>='a'&& token<='z')
 			return true;
 		return false;
 	}
+	/* if the token is an int
+	 * 
+	 */
 	public static boolean isIntToken(char token) {
 		if(token>='0'&&token<='9')
 			return true;
 		return false;
 	}
+	/*if the token is an operator
+	 * 
+	 */
 	public static boolean isOperatorToken(char token) {
 		switch(token) {
 		case '*': 
@@ -68,6 +97,18 @@ public class Lexer {
 		default:
 			return false;
 		}
+	}
+	/* checks if the token is allowed token - 
+	 * according the rules.
+	 */
+	public static boolean allowedChar(char token) {
+		boolean allowed=true;
+		if(!(isOperatorToken(token)) && !(isIntToken(token))&& !(isCharToken(token))) {
+			if(token != ')' && token != '(' && token !=';') {
+				allowed=false;
+			}
+		}
+		return allowed;
 	}
 	
 	
