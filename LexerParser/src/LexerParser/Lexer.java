@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class Lexer {
 	
+	static int i=0;
 	private String input;
 	private List<Character> allTokens;
-	  
+
 	/**the constructor. 
 	 * getting the new string and initiate the tokens array.
 	 * @param newInput
 	 */
-	
+
 	public Lexer(String newInput) {
 		this.input = newInput;
 		this.allTokens = new ArrayList<Character>();
@@ -23,16 +23,16 @@ public class Lexer {
 			//System.out.println(allTokens);
 		}	
 	}
-	
+
 	/**checks if the input is valid
-	*/
+	 */
 	public boolean isValidInput() {
 		boolean valid = true;
-		
+
 		/** first of all, 
 		 * checking if the first token is`nt a operator
 		 */
-		
+
 		switch(allTokens.get(0)) {
 		case '*': valid= false;break;
 		case ';': valid= false;break;
@@ -44,17 +44,17 @@ public class Lexer {
 		case '/': valid= false;break;
 		default: valid= true;break;
 		}
-		
+
 		/**if its a single character, return true/false
 		 *  according to the switch above(valid).
 		 */
-		
+
 		if (allTokens.size()==1) {
 			return valid;
 		}
-		
+
 		/** check all the options of allowed token
-		*/
+		 */
 		for(int i=0; i<allTokens.size();i++) {
 			if(!(allowedChar(allTokens.get(i)))){
 				valid = false;
@@ -63,10 +63,10 @@ public class Lexer {
 		/**
 		//
 		// TODO : make more checkers
-		*/
+		 */
 		return valid;
 	}
-	
+
 	/* if the token is a letter
 	 * 
 	 */
@@ -110,8 +110,14 @@ public class Lexer {
 		}
 		return allowed;
 	}
-	
-	
-	
+	public char getToken() {
+		char token;
+		token= allTokens.get(i);
+		if(allTokens.size()>=1)   
+			i++;
+		else 
+			System.out.println("this is the last token");
+		return token;
+	}
 
 }
