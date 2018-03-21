@@ -37,10 +37,8 @@ public class Lexer {
 		case '*': valid= false;break;
 		case ';': valid= false;break;
 		case ')': valid= false;break;
-		case '(': valid= false;break;
 		case '=': valid= false;break;
 		case '+': valid= false;break;
-		case '-': valid= false;break;
 		case '/': valid= false;break;
 		default: valid= true;break;
 		}
@@ -78,7 +76,7 @@ public class Lexer {
 	/* if the token is an int
 	 * 
 	 */
-	public static boolean isIntToken(char token) {
+	public static boolean isDigitToken(char token) {
 		if(token>='0'&&token<='9')
 			return true;
 		return false;
@@ -103,7 +101,7 @@ public class Lexer {
 	 */
 	public static boolean allowedChar(char token) {
 		boolean allowed=true;
-		if(!(isOperatorToken(token)) && !(isIntToken(token))&& !(isCharToken(token))) {
+		if(!(isOperatorToken(token)) && !(isDigitToken(token))&& !(isCharToken(token))) {
 			if(token != ')' && token != '(' && token !=';') {
 				allowed=false;
 			}
@@ -118,6 +116,9 @@ public class Lexer {
 		else 
 			System.out.println("this is the last token");
 		return token;
+	}
+	public char getCurrentToken() {
+		return allTokens.get(i);
 	}
 
 }

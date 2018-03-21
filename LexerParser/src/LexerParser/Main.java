@@ -11,6 +11,7 @@ public class Main {
 		System.out.println("enter an input");
 		input=in.next();
 		Lexer newInput = new Lexer(input);
+		Parser parser= new Parser(input);
 		// checks the method isvalid
 		if(newInput.isValidInput()) 
 			System.out.println("true");
@@ -18,9 +19,9 @@ public class Main {
 			System.out.println("false");
 		token= newInput.getToken();
 		System.out.println(token);
-		System.out.println(newInput.getToken());
+		String new1 = parser.Integer(token);
+		System.out.println(new1);
 		// TODO Auto-generated method stub
+		
 	}
-
-
 }
