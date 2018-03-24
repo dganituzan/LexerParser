@@ -1,6 +1,7 @@
 package LexerParser;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -17,7 +18,7 @@ public class Lexer {
 
 	public Lexer(String newInput) {
 		this.input = newInput;
-		this.allTokens = new ArrayList<Character>();
+		this.allTokens = new LinkedList<Character>();
 		for(int i=0; i<this.input.length();i++) {
 			allTokens.add(this.input.charAt(i));
 			//System.out.println(allTokens);
@@ -42,11 +43,17 @@ public class Lexer {
 		case '/': valid= false;break;
 		default: valid= true;break;
 		}
+		/**if the token ";" isnt the last token
+		 * the input is not correct input
+		 */
+		if(!(Character.toString(allTokens.get(i-1)).equals(";"))){
+			valid=false;
+		}
 
 		/**if its a single character, return true/false
 		 *  according to the switch above(valid).
 		 */
-
+		
 		if (allTokens.size()==1) {
 			return valid;
 		}
@@ -90,7 +97,6 @@ public class Lexer {
 		case '+': 
 		case '-': 
 		case '/': 
-		case '=':
 			return true;
 		default:
 			return false;
@@ -108,17 +114,17 @@ public class Lexer {
 		}
 		return allowed;
 	}
-	public char getToken() {
-		char token;
-		token= allTokens.get(i);
+	public String getToken() {
+		String token;
+		token = Character.toString(allTokens.get(i));
 		if(allTokens.size()>=1)   
 			i++;
 		else 
 			System.out.println("this is the last token");
 		return token;
 	}
-	public char getCurrentToken() {
-		return allTokens.get(i);
+	public String getCurrentToken() {
+		return Character.toString(allTokens.get(i));
 	}
 
 }
