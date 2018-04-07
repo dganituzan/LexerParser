@@ -9,7 +9,7 @@ public class Lexer {
 	
 	static int i=0;
 	private String input;
-	private List<Character> allTokens;
+	protected List<Character> allTokens;
 
 	/**the constructor. 
 	 * getting the new string and initiate the tokens array.
@@ -23,6 +23,19 @@ public class Lexer {
 			allTokens.add(this.input.charAt(i));
 			//System.out.println(allTokens);
 		}	
+	}
+	/*Prints Token list 
+	 * [token value token type | token value token type]
+	 * for -> b; -> prints:
+	 * [b IDENTIFIER | ; END_OF_LINE]
+	 */
+	public void printList() {
+		System.out.print("[");
+		for(int i = 0; i < allTokens.size(); i++) {
+			if (i==allTokens.size()-1) System.out.print(allTokens.get(i));
+			else System.out.print(allTokens.get(i) + " | ");
+		}
+		System.out.println("]");
 	}
 
 	/**checks if the input is valid
@@ -102,6 +115,21 @@ public class Lexer {
 			return false;
 		}
 	}
+	/*
+	 *  if the token is an ';' - end of the line.
+	 */
+	public static boolean isEndLine(char token)
+	{
+		if (token == ';')
+			return true;
+		return false;
+	}
+	public static boolean isBracket(char token)
+	{
+		if(token == '(' || token == ')')
+			return true;
+		return false;
+	}
 	/* checks if the token is allowed token - 
 	 * according the rules.
 	 */
@@ -125,6 +153,12 @@ public class Lexer {
 	}
 	public String getCurrentToken() {
 		return Character.toString(allTokens.get(i));
+	}
+	public boolean lookingToken()
+	{
+		int temp = Lexer.i + 1;
+		if (temp>this.allTokens.size()) return false;
+		else return true;  
 	}
 
 }
