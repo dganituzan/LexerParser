@@ -25,9 +25,11 @@ The calculator is capable of doing the following things:
 * ';' should be the end of the command.
 
 *** Package ***
+
 LexerParser.
 
 *** Classes & Definitions ***
+
 Lexer - gets a String (input user). separate into tokens and check if all the tokens are "by the rules". 
 Parser -  this class reads the tokens the Lexer created and calculating the result of the user input by the functions:
 line: "uniting" all the tokens and gets a result.
@@ -37,12 +39,14 @@ factor: return the value of a token. identifier , Integer, -factor and bracket e
 Main - The class where the user put in his command. Actually, all user access occurs there.
 
 *** Running the program ***
+
 Navigate to Start -> Run. Enter cmd in the commend liמe.
 Set the path to your JDK bin directory, for example: "set path=C:\Program Files\Java\jdk1.8.0_161\bin".
 At the run window enter the project source folder likewise: "cd JavaEclipseWorkspace/hello1.
 Type "java Main" and follow the instuctions- start calulating.
 
 *** Algoritems ***
+
 None.
 
 
