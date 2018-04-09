@@ -6,7 +6,6 @@ public class Parser {
 	private int variable[];
 	private String token;
 	private int result;
-	//private boolean valid;
 	public boolean isResult;
 	String tav="";
 	public Parser(){
@@ -18,26 +17,22 @@ public class Parser {
 		this.token=lexer.getCurrentToken();
 		this.result = 0;
 		while(token.charAt(0)!= ';') {
-			
-			System.out.println(token);
-			// If its an Integer at the beginning, then its calculation
+			/*
+			 *  If its an Integer at the beginning, 
+			 *  then its a calculation
+			 */
 			if(Lexer.isDigitToken(token.charAt(0))) {
-				//				token = Integer(lexer.getCurrentToken());			// dont have to
 				this.result = expression();
 			}
 			// Else its possibly an Assign command 
 			else if (Lexer.isCharToken(token.charAt(0))) {
-				System.out.println(token);
 				tav = token;
 				this.token=lexer.getToken();
 				// If its an assign command then 
 				if (token.equals("=")) {
 					this.isResult = false;
 					this.token=lexer.getToken();
-					System.out.println(token);
-					if (Lexer.isDigitToken(token.charAt(0))){// && (!Lexer.isOperatorToken(lexer.allTokens.get(Lexer.i)))) {
-						//						int a = Integer.parseInt(lexer.getCurrentToken());
-						//						this.variable[tav.charAt(0)-'a'] = a;
+					if (Lexer.isDigitToken(token.charAt(0))){
 						int temp =  expression();
 						this.variable[tav.charAt(0)-'a'] = temp;
 						this.result=temp;
@@ -46,10 +41,7 @@ public class Parser {
 					else if (token.equals(')')) {
 						throw new IllegalArgumentException ("Close Bracket cannot be after '=' !");
 					}
-					//					else {
-					//						int temp = expression();
-					//						this.variable[tav.charAt(0)-'a'] = temp;
-					//					}
+					
 				}
 				// Else it is a calculation command
 				//				else if(Lexer.isOperatorToken(token.charAt(0))){
@@ -142,18 +134,14 @@ public class Parser {
 				default:
 					throw new IllegalArgumentException("No operand after identifier!");
 				}
-				
+
 			}
 			if(!isResult)
 				this.variable[tav.charAt(0)-'a'] = this.result;
-				
+
 		}
 	}
-	public String Integer(String nextToken) {
-		if(!(Lexer.isDigitToken(token.charAt(0))))
-			return nextToken+"";
-		return nextToken+Integer(lexer.getToken());
-	}
+
 	/* Expression starts a recursive calculation
 	 * Addition and Subtraction actions begin excute here
 	 * @return val (int) 
@@ -186,7 +174,7 @@ public class Parser {
 			{
 				token = lexer.getToken();
 				if(this.result !=0)
-				value = this.result*factor();
+					value = this.result*factor();
 				else value = value*factor();
 			}
 			else if(token.equals("/"))
@@ -234,6 +222,7 @@ public class Parser {
 	public int getResult() {
 		return this.result;
 	}
+
 
 	/* setisResult()
 	 * If it is calculation, setting the value to true

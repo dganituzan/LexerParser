@@ -5,7 +5,7 @@ import java.util.List;
 
 
 public class Lexer {
-	
+
 	static int i=0;
 	private String input;
 	protected List<String> allTokens;
@@ -18,19 +18,18 @@ public class Lexer {
 	public Lexer(String newInput) {
 		this.input = newInput;
 		this.allTokens = new LinkedList<String>();
-		for(int i=0; i<this.input.length();i++) {
-			allTokens.add(Character.toString(this.input.charAt(i)));
-			//System.out.println(allTokens);
+		for(int j=0,k=0; j<this.input.length();j++,k++) {
+
+			allTokens.add(Character.toString(this.input.charAt(j)));
+			//checking integer
+			if(allTokens.get(k).charAt(0) >='0'&& allTokens.get(k).charAt(0)<='9'){
+				String sub= input.substring(j);
+				allTokens.set(k,Integer(sub)) ;
+				j=j+index-1;
+				
+			}
 		}	
 	}
-//	public String findNum(LinkedList<Character> list){
-//		String first;
-//		for(int i=0; i<this.input.length();i++) {
-//			if(list.get(i) >='0'&& list.get(i)<='9') 
-//				first = list.get(i);	
-//		}
-//		return "";
-//	}
 	/*Prints Token list 
 	 * [token value token type | token value token type]
 	 * for -> b; -> prints:
@@ -44,7 +43,7 @@ public class Lexer {
 		}
 		System.out.println("]");
 	}
-	
+
 	/**checks if the input is valid
 	 */
 	public boolean isValidInput() {
@@ -53,27 +52,27 @@ public class Lexer {
 		/** first of all, 
 		 * checking if the first token is`nt a operator
 		 */
-		
-		switch(allTokens.get(0)) {
-		case "*": valid= false;break;
-		case ";": valid= false;break;
-		case ")": valid= false;break;
-		case "=": valid= false;break;
-		case "+": valid= false;break;
-		case "/": valid= false;break;
+
+		switch(allTokens.get(0).charAt(0)) {
+		case '*': valid= false;break;
+		case ';': valid= false;break;
+		case ')': valid= false;break;
+		case '=': valid= false;break;
+		case '+': valid= false;break;
+		case '/': valid= false;break;
 		default: valid= true;break;
 		}
 		/**if the token ";" isnt the last token
 		 * the input is not correct input
 		 */
-		if(!(Character.toString(allTokens.get(allTokens.size()-1)).equals(";"))){
+		if(!(Character.toString(allTokens.get(allTokens.size()-1).charAt(0)).equals(";"))){
 			valid=false;
 		}
 
 		/**if its a single character, return true/false
 		 *  according to the switch above(valid).
 		 */
-		
+
 		if (allTokens.size()==1) {
 			return valid;
 		}
@@ -81,7 +80,7 @@ public class Lexer {
 		/** check all the options of allowed token
 		 */
 		for(int i=0; i<allTokens.size();i++) {
-			if(!(allowedChar(allTokens.get(i)))){
+			if(!(allowedChar(allTokens.get(i).charAt(0)))){
 				valid = false;
 			}
 		}
@@ -149,23 +148,45 @@ public class Lexer {
 		}
 		return allowed;
 	}
+	// gets the next token 
 	public String getToken() {
 		String token;
 		if(allTokens.size()>=1)   
 			i++;
 		else 
 			System.out.println("this is the last token");
-		token = Character.toString(allTokens.get(i));
+		token = allTokens.get(i);
 		return token;
 	}
+	//gets the current token
 	public String getCurrentToken() {
-		return Character.toString(allTokens.get(i));
+		return allTokens.get(i);
 	}
+	/*
+	 * checking if there are more tokens
+	 */
 	public boolean lookingToken()
 	{
 		int temp = Lexer.i + 1;
 		if (temp>this.allTokens.size()-1) return false;
 		else return true;  
 	}
+// check integer token - (more than one digit)
+	static int index=0;
+	public String Integer(String str){
+		String intToken = "";
+		for(int j =0; j<str.length();j++){
+			if(isDigitToken(str.charAt(j))){
+				intToken +=str.charAt(j);
+			}
+			else{
+				index = j;
+				j=str.length();
+			}			
+		}
+		return intToken;
+	}
+
+
 
 }

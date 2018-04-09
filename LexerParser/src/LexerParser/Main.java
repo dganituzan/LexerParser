@@ -8,13 +8,14 @@ public class Main{
 
 	public static void main(String[] args) throws Exception
 	{
+
 		Scanner in = new Scanner(System.in);
 		boolean isDone=false;
 		Parser parser= new Parser();
 		String input;
 		String token;
 		System.out.println("Hello");
-		
+
 		do {
 			// Instructions
 			try{
@@ -53,32 +54,31 @@ public class Main{
 					}
 				}
 			}
-				// Catch exceptions from Lexer 
-				catch (Exception e) {
-					System.out.println(e.getMessage());
-					System.out.println("Insert new command, 'END' to exit");
-				}
+			// Catch exceptions from Lexer 
+			catch (Exception e) {
+				System.out.println(e.getMessage());
+				System.out.println("Insert new command, 'END' to exit");
+			}
 			if(parser.isResult){
 				System.out.println(parser.getResult());
 			}
 			Lexer.i = 0;
-			}while (!isDone);
-			// Closing the scanner
-			in.close(); 
-			System.out.println("Exiting... Goodbye!");
-		}
+		}while (!isDone);
+		// Closing the scanner
+		in.close(); 
+		System.out.println("Exiting... Goodbye!");
 	}
+}
 
 
-
-/*
- * 
- * else
- * token= newInput.getToken();
- * System.out.println(token);
- * String new1 = parser.Integer(token);
- * System.out.println(new1);
- */
+/////*
+//// * 
+//// * else
+//// * token= newInput.getToken();
+//// * System.out.println(token);
+//// * String new1 = parser.Integer(token);
+//// * System.out.println(new1);
+//// */
 
 
 
