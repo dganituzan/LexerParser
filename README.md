@@ -5,7 +5,9 @@
 *** Developers Information: ***
 
 Name: Dganit Uzan. ID: 206067563. Email: dganit230395@gmail.com
+
 Name: Idan Koper. ID: 204391130. Email: idankoper@gmail.com
+
 Second year, Computer Science Department - Ashkelon College.
 
 *** Assignment ***
