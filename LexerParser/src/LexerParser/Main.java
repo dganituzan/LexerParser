@@ -8,21 +8,23 @@ public class Main{
 
 	public static void main(String[] args) throws Exception
 	{
-
 		Scanner in = new Scanner(System.in);
 		boolean isDone=false;
 		Parser parser= new Parser();
 		String input;
 		String token;
-		System.out.println("Hello");
-
+		System.out.println("Hello!");
+		System.out.println("Enter an input, last char `;`. press 'End' to Exit");
 		do {
 			// Instructions
 			try{
-				System.out.println("Enter an input, last char `;`. press 'End' to Exit");
 				input = in.nextLine();
+				// moves all the space from the input.
+				input.replaceAll("\\s+","");
 				if (input.equals("END")) isDone = true;
-				// As long as we ain't getting END as an input
+				/*
+				 *  As long as we ain't getting END as an input
+				 */
 				else {
 					// Initialize new Lexer
 					Lexer lexer = new Lexer(input);
@@ -34,10 +36,9 @@ public class Main{
 					Lexer newInput = new Lexer(input);
 					// checks the method isvalid
 					if(newInput.isValidInput()) {
-						System.out.println("Your input is Valid");
-						System.out.println("Token divide");
+						System.out.println("Your input is Valid, good!");
+						System.out.print("Token divide: ");
 						newInput.printList();
-						System.out.println(parser.getResult());
 						parser.line(newInput);
 						if (parser.isResult) { 
 							System.out.println("Result: " + parser.getResult());
@@ -51,6 +52,7 @@ public class Main{
 					}
 					else{
 						System.out.println("your input is invalid. please try again.");
+						System.out.println("To continue, Insert new command, 'END' to exit");
 					}
 				}
 			}
@@ -59,9 +61,9 @@ public class Main{
 				System.out.println(e.getMessage());
 				System.out.println("Insert new command, 'END' to exit");
 			}
-			if(parser.isResult){
-				System.out.println(parser.getResult());
-			}
+//			if(parser.isResult){
+//				System.out.println(parser.getResult());
+//			}
 			Lexer.i = 0;
 		}while (!isDone);
 		// Closing the scanner
@@ -69,16 +71,5 @@ public class Main{
 		System.out.println("Exiting... Goodbye!");
 	}
 }
-
-
-/////*
-//// * 
-//// * else
-//// * token= newInput.getToken();
-//// * System.out.println(token);
-//// * String new1 = parser.Integer(token);
-//// * System.out.println(new1);
-//// */
-
 
 

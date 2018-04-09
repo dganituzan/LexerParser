@@ -43,21 +43,9 @@ public class Parser {
 					}
 					
 				}
-				// Else it is a calculation command
-				//				else if(Lexer.isOperatorToken(token.charAt(0))){
-				//					if (Lexer.isDigitToken(token.charAt(0)) && (Lexer.isOperatorToken(lexer.allTokens.get(Lexer.i)))) {
-				//						int a = Integer.parseInt(lexer.getCurrentToken());
-				//						this.result = this.variable[tav.charAt(0)-'a'];
-				//						this.isResult = true;
-				//						this.token=lexer.getToken();
-				//					}
-				//					else if(token.equals("(") || token.equals(")")){
-				//						token= lexer.getToken();
-				//					}
-				//
-				//				}
-
-				// If its an opernad, then we need some calculation.
+				/*
+				 * if its calculation with a character
+				 */
 				else if (Lexer.isOperatorToken(token.charAt(0))) {
 					this.isResult = true;
 					this.result=this.variable[tav.charAt(0)-'a'];
@@ -90,25 +78,23 @@ public class Parser {
 						throw new IllegalArgumentException("No operand after identifier!");
 					}
 				}
-				//				else if (token.equals("(")) {
-				//					this.token=lexer.getToken();
-				//				}
-				//				else if (token.equals(")")) {
-				//					this.token=lexer.getToken();
-				//				}
 				else if (Lexer.isEndLine(token.charAt(0))) {
 					this.isResult = true;
 					this.result = this.variable[tav.charAt(0)-'a'];
-					//if (lexer.lookingToken()) throw new IllegalArgumentException("Not allowed char after ';' ! ");
-					//else break;	
 				}
 			}
+			/*
+			 * if it's a bracket
+			 */
 			else if (token.equals("(")) {
 				this.token=lexer.getToken();
 			}
 			else if (token.equals(")")) {
 				this.token=lexer.getToken();
 			}
+			/*
+			 * operator case
+			 */
 			else if (Lexer.isOperatorToken(token.charAt(0))){
 				switch (token.charAt(0)) {
 				case '+': 
@@ -134,11 +120,9 @@ public class Parser {
 				default:
 					throw new IllegalArgumentException("No operand after identifier!");
 				}
-
 			}
 			if(!isResult)
 				this.variable[tav.charAt(0)-'a'] = this.result;
-
 		}
 	}
 
@@ -148,7 +132,6 @@ public class Parser {
 	 */
 	public int expression() {
 		int value = term();
-		System.out.println(token);
 		if(token.equals("+")||token.equals("-")) 
 			if(token.equals("+"))
 			{
@@ -168,7 +151,6 @@ public class Parser {
 	 */
 	public int term() {
 		int value = factor();
-		System.out.println(token);
 		if(token.equals("*")||token.equals("/")) {
 			if(token.equals("*"))
 			{
@@ -187,7 +169,6 @@ public class Parser {
 	}
 	public int factor() {
 		int val = 0;
-		System.out.println(token);
 		if (Lexer.isDigitToken(token.charAt(0))|| (Lexer.isCharToken(token.charAt(0)))) {
 			if (Lexer.isDigitToken(token.charAt(0))) {
 				val = Integer.parseInt(token);
@@ -222,23 +203,5 @@ public class Parser {
 	public int getResult() {
 		return this.result;
 	}
-
-
-	/* setisResult()
-	 * If it is calculation, setting the value to true
-	 */
 }
 
-/**
-	public String isDigit(char token) {
-		System.out.println("test");
-		if(lexer.getCurrentToken() <='0'&&lexer.getCurrentToken()>='9') 
-			return null; 
-		System.out.println(isDigit(lexer.getToken())+lexer.getCurrentToken());
-		return isDigit(lexer.getToken())+lexer.getCurrentToken();
-			}
-
-
-
-
- */
