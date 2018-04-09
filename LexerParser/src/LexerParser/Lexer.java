@@ -1,6 +1,5 @@
 package LexerParser;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,7 +8,7 @@ public class Lexer {
 	
 	static int i=0;
 	private String input;
-	protected List<Character> allTokens;
+	protected List<String> allTokens;
 
 	/**the constructor. 
 	 * getting the new string and initiate the tokens array.
@@ -18,12 +17,20 @@ public class Lexer {
 
 	public Lexer(String newInput) {
 		this.input = newInput;
-		this.allTokens = new LinkedList<Character>();
+		this.allTokens = new LinkedList<String>();
 		for(int i=0; i<this.input.length();i++) {
-			allTokens.add(this.input.charAt(i));
+			allTokens.add(Character.toString(this.input.charAt(i)));
 			//System.out.println(allTokens);
 		}	
 	}
+//	public String findNum(LinkedList<Character> list){
+//		String first;
+//		for(int i=0; i<this.input.length();i++) {
+//			if(list.get(i) >='0'&& list.get(i)<='9') 
+//				first = list.get(i);	
+//		}
+//		return "";
+//	}
 	/*Prints Token list 
 	 * [token value token type | token value token type]
 	 * for -> b; -> prints:
@@ -37,7 +44,7 @@ public class Lexer {
 		}
 		System.out.println("]");
 	}
-
+	
 	/**checks if the input is valid
 	 */
 	public boolean isValidInput() {
@@ -46,20 +53,20 @@ public class Lexer {
 		/** first of all, 
 		 * checking if the first token is`nt a operator
 		 */
-
+		
 		switch(allTokens.get(0)) {
-		case '*': valid= false;break;
-		case ';': valid= false;break;
-		case ')': valid= false;break;
-		case '=': valid= false;break;
-		case '+': valid= false;break;
-		case '/': valid= false;break;
+		case "*": valid= false;break;
+		case ";": valid= false;break;
+		case ")": valid= false;break;
+		case "=": valid= false;break;
+		case "+": valid= false;break;
+		case "/": valid= false;break;
 		default: valid= true;break;
 		}
 		/**if the token ";" isnt the last token
 		 * the input is not correct input
 		 */
-		if(!(Character.toString(allTokens.get(i-1)).equals(";"))){
+		if(!(Character.toString(allTokens.get(allTokens.size()-1)).equals(";"))){
 			valid=false;
 		}
 
@@ -136,7 +143,7 @@ public class Lexer {
 	public static boolean allowedChar(char token) {
 		boolean allowed=true;
 		if(!(isOperatorToken(token)) && !(isDigitToken(token))&& !(isCharToken(token))) {
-			if(token != ')' && token != '(' && token !=';') {
+			if(token != ')' && token != '(' && token !=';' && '='!= token) {
 				allowed=false;
 			}
 		}
@@ -144,11 +151,11 @@ public class Lexer {
 	}
 	public String getToken() {
 		String token;
-		token = Character.toString(allTokens.get(i));
 		if(allTokens.size()>=1)   
 			i++;
 		else 
 			System.out.println("this is the last token");
+		token = Character.toString(allTokens.get(i));
 		return token;
 	}
 	public String getCurrentToken() {
@@ -157,7 +164,7 @@ public class Lexer {
 	public boolean lookingToken()
 	{
 		int temp = Lexer.i + 1;
-		if (temp>this.allTokens.size()) return false;
+		if (temp>this.allTokens.size()-1) return false;
 		else return true;  
 	}
 
