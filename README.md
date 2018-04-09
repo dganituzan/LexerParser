@@ -58,6 +58,11 @@ At the run window enter the project source folder likewise: "cd JavaEclipseWorks
 
 Type "java Main" and follow the instuctions- start calulating.
 
+*** Exit the program ***
+
+follow the instructions:
+press 'END' for exit.
+
 *** Algoritems ***
 
 None.
