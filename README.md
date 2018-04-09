@@ -1,15 +1,20 @@
 # LexerParser
+
 *** Asigment 1: Lexer Parser ***
+
 *** Developers Information: ***
+
 Name: Dganit Uzan. ID: 206067563. Email: dganit230395@gmail.com
 Name: Idan Koper. ID: 204391130. Email: idankoper@gmail.com
 Second year, Computer Science Department - Ashkelon College.
 
 *** Assignment ***
+
 Writing a program that will use as a calculator with a basic commands
 while using Lexer and Parser.
 
 *** Goals ***
+
 The calculator is capable of doing the following things:
 * Instant Operation: for example '2 + 3*4' will print '14'.
   or, for instance   (2+3)*4; will print 20.
